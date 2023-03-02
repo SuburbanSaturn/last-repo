@@ -75,6 +75,8 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 # export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$PATH"
+# export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$PATH"
+
 
 DATABASES = {   
     'default': {   
