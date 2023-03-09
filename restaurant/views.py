@@ -6,11 +6,12 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.decorators import permission_classes, api_view
 
-
-from .models import Booking, Menu
-from .serializers import bookingSerializer, menuSerializer, UserSerializer
+from .models import Booking, Menu, MenuItem
+from .serializers import bookingSerializer, menuSerializer, UserSerializer, menuItemSerializer
 
 # Create your views here.
 
@@ -18,16 +19,20 @@ def index(request):
     return render(request, 'index.html', {})
 
 class BookingViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = bookingSerializer
     
+   
 class MenuItemsView(generics.ListCreateAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = menuSerializer
+    queryset = MenuItem.objects.all()
+    serializer_class = menuItemSerializer
+    
 
 class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = menuSerializer    
+    permission_classes = [IsAuthenticated]
+    queryset = MenuItem.objects.all()
+    serializer_class = menuItemSerializer    
 
 class userView(APIView):
     
@@ -39,3 +44,12 @@ class userView(APIView):
             serializer.save()
         return Response(serializer.data)
     
+
+@api_view()
+@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+def msg(request):
+    return Response({"message":"This view is protected"})
+
+
+

@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     'restaurant',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +94,30 @@ DATABASES = {
         }   
     }   
 } 
+
+#DRF Settings
+
+REST_FRAMEWORK = {
+	'DEFAULT_RENDERER_CLASSES' : [
+	    'rest_framework.renderers.JSONRenderer', 
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+	    'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+ 
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+}
+
+#Djoser Variable in Settings
+
+DJOSER = {"USER_ID_FIELD":"username"}
 
 
 # Password validation
