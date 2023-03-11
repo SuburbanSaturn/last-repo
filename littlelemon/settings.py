@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'restaurant',
-    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
