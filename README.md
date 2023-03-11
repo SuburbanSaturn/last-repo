@@ -26,8 +26,8 @@ To create the same virtual environment that was used to create this project:
 
 Admin credentials:
 
-- username: admin
-- password: admin
+- username: cosmicbuc
+- password: Olvidado1!
 
 
 --------------------
